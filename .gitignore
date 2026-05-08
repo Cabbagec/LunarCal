@@ -2,6 +2,8 @@
 .DS_Store
 .idea/
 *.iml
+*.swp
+.*.swp
 
 # Local agent/session state
 .agents/

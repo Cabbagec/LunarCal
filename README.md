@@ -1,21 +1,27 @@
-# LunarCal
+<h1>
+  <img src="docs/images/app-icon.png" width="42" height="42" alt="LunarCal icon" />
+  LunarCal
+</h1>
+
+<p align="center">
+  English | <a href="README.zh-CN.md">简体中文</a>
+</p>
 
 LunarCal is an Android calendar reminder app for Chinese lunar-calendar events.
 
-The app is built with Kotlin and Jetpack Compose. It supports English and Simplified Chinese UI, light/dark themes, and an offline lunar calendar covering 1901-2100.
+The app is built with Kotlin and Jetpack Compose. It supports English and Simplified Chinese UI, light/dark themes, and a fully offline lunar calendar covering 1901-2100. LunarCal does not collect or transmit app data; event delivery and notifications rely on Android's local Calendar Provider.
+
+<p align="center">
+  <img src="docs/images/month-view.png" width="30%" alt="Month view in light and dark themes" />
+  <img src="docs/images/year-view.png" width="30%" alt="Year view in light and dark themes" />
+  <img src="docs/images/drawer.png" width="30%" alt="Navigation drawer in light and dark themes" />
+</p>
 
 ## Features
 
-- Month and year calendar views with swipe navigation.
-- Gregorian date display alongside Chinese lunar year/month/day information.
-- Lunar event creation from any day detail view.
-- One-time, yearly lunar, and monthly lunar recurring events.
-- Up to five prior reminders per event, with day/week offsets and a time picker.
-- Android Calendar Provider sync for phone calendar notifications.
-- Recovery of app-owned calendar events after reinstall when provider rows still exist.
-- External calendar edit/deletion detection with conflict handling.
-- Search, jump-to-date, all-events list, and editable event details.
-- English and Simplified Chinese app language setting.
+- Swipeable month and year views with Gregorian dates and Chinese lunar labels.
+- Create one-time, yearly, or monthly reminders based on Chinese lunar dates.
+- Support reminders for per event with day/week offsets and a time picker.
 
 ## Calendar Data Source
 
