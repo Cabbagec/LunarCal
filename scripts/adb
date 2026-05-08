@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+REPO_DIR=$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)
+
+exec docker run --rm \
+  --network host \
+  --user "$(id -u):$(id -g)" \
+  -e HOME=/workspace/build/android-adb-home \
+  -v "$REPO_DIR:/workspace" \
+  -w /workspace \
+  lunarcal-android \
+  /usr/bin/qemu-x86_64 -L /usr/x86_64-linux-gnu \
+  /opt/android-sdk/platform-tools/adb -P "${ADB_SERVER_PORT:-5037}" "$@"

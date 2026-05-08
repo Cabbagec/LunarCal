@@ -1,0 +1,38 @@
+services:
+  android:
+    build:
+      context: .
+      dockerfile: build-tools/Dockerfile.android
+    image: lunarcal-android
+    user: "1001:1001"
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+    environment:
+      ANDROID_HOME: /opt/android-sdk
+      ANDROID_SDK_ROOT: /opt/android-sdk
+      ANDROID_USER_HOME: /workspace/build/android-user-home
+      GRADLE_USER_HOME: /workspace/build/gradle-user-home
+      HOME: /workspace/build/home
+    command: gradle -Duser.home=/workspace/build/home --no-daemon --project-cache-dir /workspace/build/gradle-project-cache :app:assembleDebug
+  adb:
+    build:
+      context: .
+      dockerfile: build-tools/Dockerfile.android
+    image: lunarcal-android
+    user: "1001:1001"
+    network_mode: host
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+    environment:
+      HOME: /workspace/build/android-adb-home
+    command:
+      - /usr/bin/qemu-x86_64
+      - -L
+      - /usr/x86_64-linux-gnu
+      - /opt/android-sdk/platform-tools/adb
+      - -P
+      - "5037"
+      - nodaemon
+      - server

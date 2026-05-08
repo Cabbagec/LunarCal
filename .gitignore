@@ -1,0 +1,43 @@
+# Local IDE and OS metadata
+.DS_Store
+.idea/
+*.iml
+
+# Local agent/session state
+.agents/
+.codex/
+
+# Gradle, Kotlin, and Android build output
+.gradle/
+.kotlin/
+build/
+app/build/
+*/build/
+.externalNativeBuild/
+.cxx/
+captures/
+
+# Local Android tooling and downloaded binaries
+local.properties
+platform-tools/
+
+# Packaged artifacts
+*.apk
+*.aab
+*.apks
+*.idsig
+
+# Signing keys, certs, and release secrets
+keystore.properties
+app/signing/
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+*.crt
+*.cer
+
+# Internal build/run notes from this workspace
+INSTRUCTIONS.md
+Task-*.md

@@ -1,0 +1,24 @@
+FROM gradle:8.10.2-jdk17-jammy
+
+ENV ANDROID_HOME=/opt/android-sdk
+ENV ANDROID_SDK_ROOT=/opt/android-sdk
+ENV PATH=${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:${PATH}
+
+USER root
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends unzip ca-certificates curl qemu-user libc6-amd64-cross libgcc-s1-amd64-cross \
+    && mkdir -p ${ANDROID_HOME}/cmdline-tools \
+    && curl -fsSL https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o /tmp/android-commandline-tools.zip \
+    && unzip -q /tmp/android-commandline-tools.zip -d ${ANDROID_HOME}/cmdline-tools \
+    && mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest \
+    && rm /tmp/android-commandline-tools.zip \
+    && yes | sdkmanager --licenses >/dev/null \
+    && sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" \
+    && mkdir -p /opt/android-sdk/aapt2-wrapper \
+    && printf '%s\n' '#!/bin/sh' 'exec /usr/bin/qemu-x86_64 -L /usr/x86_64-linux-gnu /opt/android-sdk/build-tools/35.0.0/aapt2 "$@"' > /opt/android-sdk/aapt2-wrapper/aapt2 \
+    && chmod +x /opt/android-sdk/aapt2-wrapper/aapt2 \
+    && apt-get purge -y unzip curl \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+
+USER gradle

@@ -1,0 +1,7 @@
+.gradle
+.kotlin
+app/build
+build
+.git
+.agents
+.codex
